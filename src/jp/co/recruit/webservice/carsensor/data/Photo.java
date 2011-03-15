@@ -4,9 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import jp.co.recruit.webservice.annotation.JSONField;
 
-import jp.co.recruit.webservice.data.Item;
+import jp.co.recruit.webservice.data.RWSItem;
 
-public class Photo extends Item {
+public class Photo extends RWSItem {
 	@JSONField("l")
 	public String largeURL;
 	@JSONField("s")

@@ -3,9 +3,9 @@ package jp.co.recruit.webservice.carsensor.data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import jp.co.recruit.webservice.data.Item;
+import jp.co.recruit.webservice.data.RWSItem;
 
-public class Shop extends Item {
+public class Shop extends RWSItem {
 
 	public Prefecture prefecture;
 	public double lat;

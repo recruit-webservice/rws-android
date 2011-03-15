@@ -13,14 +13,14 @@ import jp.co.recruit.webservice.annotation.JSONField;
 
 import android.net.Uri;
 
-public abstract class Item implements URLRequestAdapter.Item {
+public abstract class RWSItem implements URLRequestAdapter.Item {
 	public String code;
 	@JSONField
 	public String name;
 	@JSONField("name_en")
 	public String nameEnglish;
 
-	public Item(JSONObject obj) throws JSONException {
+	public RWSItem(JSONObject obj) throws JSONException {
 		if (obj.has(this.codeField()))
 			this.code = obj.getString(this.codeField());
 

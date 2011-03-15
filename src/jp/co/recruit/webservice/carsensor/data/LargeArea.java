@@ -3,9 +3,9 @@ package jp.co.recruit.webservice.carsensor.data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import jp.co.recruit.webservice.data.Item;
+import jp.co.recruit.webservice.data.RWSItem;
 
-public class LargeArea extends Item {
+public class LargeArea extends RWSItem {
 
 	public LargeArea(JSONObject obj) throws JSONException {
 		super(obj);

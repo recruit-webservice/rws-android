@@ -8,11 +8,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ngsdev.android.net.impl.JSONResponse;
-import jp.co.recruit.webservice.data.Item;
+import jp.co.recruit.webservice.data.RWSItem;
 
 public abstract class RWSResponse extends JSONResponse {
 
-	private ArrayList<Item> items;
+	private ArrayList<RWSItem> items;
 	private int total;
 	private int start;
 	private int count;
@@ -42,27 +42,27 @@ public abstract class RWSResponse extends JSONResponse {
 			count = res.getInt("results_returned");
 		if (res.has("results_start"))
 			start = res.getInt("results_start");
-		items = new ArrayList<Item>();
+		items = new ArrayList<RWSItem>();
 		JSONArray ar = res.getJSONArray(this.getItemKey());
 		for (int i = 0; i < ar.length(); i++) {
 			items.add(this.createNewEntry(ar.getJSONObject(i)));
 		}
 
 	}
-	public Item createNewEntry(JSONObject obj) throws SecurityException,
+	public RWSItem createNewEntry(JSONObject obj) throws SecurityException,
 			NoSuchMethodException, JSONException, IllegalArgumentException,
 			InstantiationException, IllegalAccessException,
 			InvocationTargetException {
-		Class<? extends Item> cls = this.getItemClass();
+		Class<? extends RWSItem> cls = this.getItemClass();
 		Class<?> argt[] = new Class<?>[1];
 		argt[0] = JSONObject.class;
-		Constructor<? extends Item> ct = cls.getConstructor(argt);
+		Constructor<? extends RWSItem> ct = cls.getConstructor(argt);
 		Object args[] = new Object[1];
 		args[0] = obj;
 		return ct.newInstance(args);
 	}
 
-	public abstract Class<? extends Item> getItemClass();
+	public abstract Class<? extends RWSItem> getItemClass();
 
 	public abstract String getItemKey();
 
@@ -81,7 +81,7 @@ public abstract class RWSResponse extends JSONResponse {
 	public String getApiVersion() {
 		return apiVersion;
 	}
-	public ArrayList<? extends Item> getItems() {
+	public ArrayList<? extends RWSItem> getItems() {
 		return items;
 	}
 

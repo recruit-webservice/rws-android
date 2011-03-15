@@ -6,9 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import jp.co.recruit.webservice.annotation.JSONField;
-import jp.co.recruit.webservice.data.Item;
+import jp.co.recruit.webservice.data.RWSItem;
 
-public class UsedCar extends Item {
+public class UsedCar extends RWSItem {
 	public static String uriFormat = null;
 	/**
 	 * Automatically set to fields
