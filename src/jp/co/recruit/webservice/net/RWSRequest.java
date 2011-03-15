@@ -5,12 +5,14 @@ import java.net.URISyntaxException;
 
 import org.ngsdev.android.net.URLRequest;
 import org.ngsdev.android.net.URLRequestParams;
+import org.ngsdev.android.util.FieldUtil;
 
 import android.content.Context;
 
 public class RWSRequest extends URLRequest {
 
 	public String apiKey = "";
+	public static String defaultApiKey = "";
 	public int order;
 	public int start;
 	public int count;
@@ -23,7 +25,10 @@ public class RWSRequest extends URLRequest {
 	@Override
 	public URLRequestParams getURLRequestParams() {
 		URLRequestParams params = new URLRequestParams();
-		if (this.apiKey == null || this.apiKey.equals(""))
+		String apiKey = this.apiKey;
+		if (!FieldUtil.isStringWithAnyText(apiKey))
+			apiKey = RWSRequest.defaultApiKey;
+		if (!FieldUtil.isStringWithAnyText(apiKey))
 			throw new Error("You must specify apiKey");
 		params.setParameter("key", apiKey);
 		params.setParameter("format", "json");

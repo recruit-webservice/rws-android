@@ -3,5 +3,8 @@ gen/*
 bin/*
 tests/gen/*
 tests/bin/*
+samples/*/gen/*
+samples/*/bin/*
 .settings/*
+*.settings
 

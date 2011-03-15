@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>RWSAndroidTests</name>
+	<name>RWSBasicSamples</name>
 	<comment></comment>
 	<projects>
+		<project>android20</project>
 		<project>RWSAndroid</project>
 	</projects>
 	<buildSpec>
