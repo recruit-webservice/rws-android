@@ -1,5 +1,7 @@
 .DS_Store
-*gen/*
-*bin/*
+gen/*
+bin/*
+tests/gen/*
+tests/bin/*
 .settings/*
 
