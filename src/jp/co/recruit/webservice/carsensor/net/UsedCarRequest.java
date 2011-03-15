@@ -127,6 +127,12 @@ public class UsedCarRequest extends RWSRequest {
 	}
 
 	@Override
+	public boolean send(RequestListener listener) {
+		this.response = new UsedCarResponse();
+		return super.send(listener);
+	}
+
+	@Override
 	public URLRequestParams getURLRequestParams() {
 		URLRequestParams params = super.getURLRequestParams();
 		
