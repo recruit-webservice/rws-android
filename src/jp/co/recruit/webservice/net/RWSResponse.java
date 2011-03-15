@@ -53,16 +53,16 @@ public abstract class RWSResponse extends JSONResponse {
 			NoSuchMethodException, JSONException, IllegalArgumentException,
 			InstantiationException, IllegalAccessException,
 			InvocationTargetException {
-		Class<Item> cls = this.getItemClass();
+		Class<? extends Item> cls = this.getItemClass();
 		Class<?> argt[] = new Class<?>[1];
-		argt[1] = JSONObject.class;
-		Constructor<Item> ct = cls.getConstructor(argt);
+		argt[0] = JSONObject.class;
+		Constructor<? extends Item> ct = cls.getConstructor(argt);
 		Object args[] = new Object[1];
-		args[1] = obj;
+		args[0] = obj;
 		return ct.newInstance(args);
 	}
 
-	public abstract Class<Item> getItemClass();
+	public abstract Class<? extends Item> getItemClass();
 
 	public abstract String getItemKey();
 
@@ -81,7 +81,7 @@ public abstract class RWSResponse extends JSONResponse {
 	public String getApiVersion() {
 		return apiVersion;
 	}
-	public ArrayList<Item> getItems() {
+	public ArrayList<? extends Item> getItems() {
 		return items;
 	}
 

@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/android20"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/RWSAndroid"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path="android20_src"/>
 	<classpathentry kind="src" path="RWSAndroid_src"/>
 	<classpathentry kind="output" path="bin"/>

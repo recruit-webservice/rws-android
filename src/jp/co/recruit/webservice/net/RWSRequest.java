@@ -13,7 +13,6 @@ public class RWSRequest extends URLRequest {
 
 	public String apiKey = "";
 	public static String defaultApiKey = "";
-	public int order;
 	public int start;
 	public int count;
 	public static String apiHost = "webservice.recruit.co.jp";
@@ -32,8 +31,6 @@ public class RWSRequest extends URLRequest {
 			throw new Error("You must specify apiKey");
 		params.setParameter("key", apiKey);
 		params.setParameter("format", "json");
-		if (order > 0)
-			params.setIntParameter("order", order);
 		if (count > 0)
 			params.setIntParameter("count", count);
 		if (start > 0)

@@ -1,67 +1,28 @@
-package jp.co.recruit.webservice.carsensor;
+package jp.co.recruit.webservice.carsensor.net;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import org.ngsdev.android.net.URLRequestParams;
+import org.ngsdev.android.util.ArrayUtil;
 import org.ngsdev.android.util.FieldUtil;
 
 import android.content.Context;
 import jp.co.recruit.webservice.net.RWSRequest;
+import jp.co.recruit.webservice.carsensor.data.DatumType;
+import jp.co.recruit.webservice.carsensor.data.MissionType;
+import jp.co.recruit.webservice.carsensor.data.OrderBy;
 
 public class UsedCarRequest extends RWSRequest {
-
-	public static enum DatumType {
-		WORLD, TOKYO
-	};
-
-	/**
-	 * ミッション種類
-	 */
-	public static enum MissionType {
-		NONE, AT, MT
-	};
-	/**
-	 * ソート順
-	 */
-	public static enum OrderBy {
-		/**
-		 * ブランド順
-		 */
-		BRAND,
-		/**
-		 * 価格安い順
-		 */
-		PRICE_ASC,
-		/**
-		 * 価格高い順
-		 */
-		PRICE_DESC,
-		/**
-		 * 車種名順
-		 */
-		MODEL_NAME,
-		/**
-		 * 年式古い順
-		 */
-		YEAR_ASC,
-		/**
-		 * 年式新しい順
-		 */
-		YEAR_DESC,
-		/**
-		 * 走行距離少ない順
-		 */
-		ODD
-	};
 	public static final String API_DIR = "/carsensor/usedcar/v1/";
 	/**
 	 * 物件ID
 	 */
-	public String id = "";
+	public ArrayList<String> ids = null;
 	/**
 	 * ブランドコード
 	 */
-	public String brandCode = "";
+	public ArrayList<String> brandCodes = null;
 	/**
 	 * 車種名
 	 */
@@ -69,19 +30,19 @@ public class UsedCarRequest extends RWSRequest {
 	/**
 	 * 国コード ( ブランドの代表国 )
 	 */
-	public String countryCode = "";
+	public ArrayList<String> countryCodes = null;
 	/**
 	 * 中古車店の所在エリア
 	 */
-	public String largeAreaCode = "";
+	public ArrayList<String> largeAreaCodes = null;
 	/**
 	 * 中古車店の所在都道府県
 	 */
-	public String prefectureCode = "";
+	public ArrayList<String> prefectureCodes = null;
 	/**
 	 * ボディタイプコード
 	 */
-	public String bodyCode = "";
+	public ArrayList<String> bodyTypeCodes = null;
 	/**
 	 * 定員
 	 */
@@ -89,7 +50,7 @@ public class UsedCarRequest extends RWSRequest {
 	/**
 	 * カラーコード
 	 */
-	public String colorCode = "";
+	public ArrayList<String> colorCodes = null;
 	/**
 	 * 最低価格
 	 */
@@ -153,33 +114,38 @@ public class UsedCarRequest extends RWSRequest {
 	 * 走行距離(最長)
 	 */
 	public int oddMax = 0;
+	/**
+	 * ソート順
+	 */
+	public OrderBy order = OrderBy.BRAND;
 	public UsedCarRequest(Context context) throws URISyntaxException {
 		super(context, API_DIR);
 	}
 
 	public boolean useGeo() {
-		return this.lat != Double.NaN && this.lng != Double.NaN;
+		return !Double.isNaN(this.lat) && !Double.isNaN(this.lng);
 	}
 
 	@Override
 	public URLRequestParams getURLRequestParams() {
 		URLRequestParams params = super.getURLRequestParams();
-		if (FieldUtil.isStringWithAnyText(this.brandCode))
-			params.setParameter("brand", this.brandCode);
+		
+		if (ArrayUtil.isArrayWithAnyItems(this.brandCodes))
+			params.setParameter("brand", this.brandCodes);
 		if (FieldUtil.isStringWithAnyText(this.modelName))
 			params.setParameter("model", this.modelName);
-		if (FieldUtil.isStringWithAnyText(this.countryCode))
-			params.setParameter("country", this.countryCode);
-		if (FieldUtil.isStringWithAnyText(this.largeAreaCode))
-			params.setParameter("large_area", this.largeAreaCode);
-		if (FieldUtil.isStringWithAnyText(this.prefectureCode))
-			params.setParameter("pref", this.prefectureCode);
-		if (FieldUtil.isStringWithAnyText(this.bodyCode))
-			params.setParameter("body", this.bodyCode);
+		if (ArrayUtil.isArrayWithAnyItems(this.countryCodes))
+			params.setParameter("country", this.countryCodes);
+		if (ArrayUtil.isArrayWithAnyItems(this.largeAreaCodes))
+			params.setParameter("large_area", this.largeAreaCodes);
+		if (ArrayUtil.isArrayWithAnyItems(this.prefectureCodes))
+			params.setParameter("pref", this.prefectureCodes);
+		if (ArrayUtil.isArrayWithAnyItems(this.bodyTypeCodes))
+			params.setParameter("body", this.bodyTypeCodes);
 		if (this.person > 0)
 			params.setIntParameter("person", person);
-		if (FieldUtil.isStringWithAnyText(this.colorCode))
-			params.setParameter("color", this.colorCode);
+		if (ArrayUtil.isArrayWithAnyItems(this.colorCodes))
+			params.setParameter("color", this.colorCodes);
 		if (this.priceMin > 0)
 			params.setIntParameter("price_min", this.priceMin);
 		if (this.priceMax > 0)
@@ -189,13 +155,13 @@ public class UsedCarRequest extends RWSRequest {
 		if (this.useGeo()) {
 			params.setDoubleParameter("lat", this.lat);
 			params.setDoubleParameter("lng", this.lng);
-			params.setConditionParameter("datum",
-					this.datum == DatumType.TOKYO, "tokyo", "world");
+			params.setParameter("datum", this.datum.toString());
 			params.setIntParameter("range", this.range > 1 ? this.range : 1);
+		} else {
+			params.setIntParameter("order", this.order.toInt());
 		}
 		if (this.mission != MissionType.NONE)
-			params.setConditionParameter("mission",
-					this.mission == MissionType.AT, "1", "2");
+			params.setIntParameter("mission", this.mission.toInt());
 		params.setFlagParameter("nonsmoking", this.nonSmoking);
 		params.setFlagParameter("leather", this.leather);
 		params.setFlagParameter("welfare", this.welfare);

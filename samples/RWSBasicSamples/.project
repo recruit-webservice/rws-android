@@ -44,4 +44,15 @@
 			<locationURI>_android_android20_43745ced/src</locationURI>
 		</link>
 	</linkedResources>
+	<filteredResources>
+		<filter>
+			<id>1300191274769</id>
+			<name></name>
+			<type>22</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-.DS_Store</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
