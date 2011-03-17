@@ -17,8 +17,13 @@ public class RWSRequest extends URLRequest {
 	public int count;
 	public static String apiHost = "webservice.recruit.co.jp";
 
-	public RWSRequest(Context context, String apiDir) throws URISyntaxException {
-		super(context, new URI("http", apiHost, apiDir, null));
+	public RWSRequest(Context context, String apiDir) {
+		super(context);
+		try {
+			this.createHttpRequest(new URI("http", apiHost, apiDir, null), GET);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

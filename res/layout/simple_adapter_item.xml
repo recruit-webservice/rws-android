@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jp.co.recruit.webservice.layout.SimpleAdapterItem
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:gravity="center_vertical"
+    android:drawablePadding="14dip"
+    android:paddingLeft="15dip"
+    android:paddingRight="15dip" />

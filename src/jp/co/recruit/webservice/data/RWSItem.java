@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ngsdev.android.adapter.URLRequestAdapter;
 import org.ngsdev.android.util.FieldUtil;
-import org.ngsdev.android.util.MD5Digest;
+
 import jp.co.recruit.webservice.annotation.JSONField;
 
 import android.net.Uri;
@@ -19,8 +19,18 @@ public abstract class RWSItem implements URLRequestAdapter.Item {
 	public String name;
 	@JSONField("name_en")
 	public String nameEnglish;
+	
+	private int _id;
+	private static int sharedId = 0;
+	
+	public RWSItem() {
+		this._id = ++sharedId;
+	}
 
 	public RWSItem(JSONObject obj) throws JSONException {
+		this._id = ++sharedId;
+		if(obj==null)
+			return;
 		if (obj.has(this.codeField()))
 			this.code = obj.getString(this.codeField());
 
@@ -69,7 +79,7 @@ public abstract class RWSItem implements URLRequestAdapter.Item {
 	}
 
 	public long getId() {
-		return Long.parseLong(new MD5Digest(code).toString(), 16);
+		return _id;
 	}
 	public abstract String detailUriFormat();
 	public Uri getUri() {

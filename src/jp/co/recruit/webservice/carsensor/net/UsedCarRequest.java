@@ -1,6 +1,5 @@
 package jp.co.recruit.webservice.carsensor.net;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import org.ngsdev.android.net.URLRequestParams;
@@ -118,7 +117,7 @@ public class UsedCarRequest extends RWSRequest {
 	 * ソート順
 	 */
 	public OrderBy order = OrderBy.BRAND;
-	public UsedCarRequest(Context context) throws URISyntaxException {
+	public UsedCarRequest(Context context) {
 		super(context, API_DIR);
 	}
 

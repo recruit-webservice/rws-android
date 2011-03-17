@@ -10,6 +10,8 @@ import org.ngsdev.android.adapter.URLRequestAdapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class RWSRequestAdapter extends URLRequestAdapter {
 
@@ -26,9 +28,32 @@ public class RWSRequestAdapter extends URLRequestAdapter {
 		RWSRequest req = (RWSRequest) this.getRequest();
 		RWSResponse res = (RWSResponse) req.response;
 		this.total = res.getTotal();
+		if (this.getUnspecifyItemName() > 0) {
+			this.total++;
+			RWSItem unspecifyItem = new RWSItem() {
+				@Override
+				public String detailUriFormat() {
+					return null;
+				}
+			};
+			unspecifyItem.name = this.getContext().getString(
+					this.getUnspecifyItemName());
+			this.items.add(unspecifyItem);
+		}
 		for (RWSItem item : res.getItems()) {
 			this.items.add(item);
 		}
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View v = super.getView(position, convertView, parent);
+		Item item = this.getItem(position);
+		if (!URLRequestAdapter.ItemView.class.isInstance(item)
+				&& TextView.class.isInstance(v)
+				&& RWSItem.class.isInstance(item))
+			((TextView) v).setText(((RWSItem) item).name);
+		return v;
 	}
 
 	@Override
@@ -54,9 +79,14 @@ public class RWSRequestAdapter extends URLRequestAdapter {
 		return total;
 	}
 
+	public int getUnspecifyItemName() {
+		return 0;
+	}
+
 	@Override
 	public View getViewForItem(Item item) {
-		return null;
+		return View.inflate(this.getContext(),
+				jp.co.recruit.webservice.R.layout.simple_adapter_item, null);
 	}
 
 }

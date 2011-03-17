@@ -1,7 +1,5 @@
 package jp.co.recruit.webservice.carsensor.net;
 
-import java.net.URISyntaxException;
-
 import org.ngsdev.android.net.URLRequestParams;
 import org.ngsdev.android.util.FieldUtil;
 
@@ -11,8 +9,8 @@ import jp.co.recruit.webservice.net.RWSRequest;
 public abstract class MasterRequest extends RWSRequest {
 
 	public String code;
-	
-	public MasterRequest(Context context, String apiDir) throws URISyntaxException {
+
+	public MasterRequest(Context context, String apiDir) {
 		super(context, apiDir);
 	}
 
