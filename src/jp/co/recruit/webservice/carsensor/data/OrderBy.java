@@ -38,7 +38,7 @@ public enum OrderBy {
 	public int toInt() {
 		return intVal;
 	}
-	public OrderBy valueOf(int val) {
+	public static OrderBy valueOf(int val) {
 		for (OrderBy d : values()) {
 			if (d.toInt() == val) {
 				return d;

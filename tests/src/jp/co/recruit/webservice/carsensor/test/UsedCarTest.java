@@ -76,11 +76,11 @@ public class UsedCarTest extends InstrumentationTestCase {
 		assertTrue(qstr.contains("order=2&"));
 		assertTrue(qstr.contains("start=2&"));
 		assertTrue(qstr.contains("count=10&"));
-		assertTrue(qstr.contains("body=C,S&"));
-		assertTrue(qstr.contains("country=JPN,GBR&"));
-		assertTrue(qstr.contains("model=インプレッサ&"));
-		assertTrue(qstr.contains("keyword=きれい\\\\&&&&"));
-		assertTrue(qstr.contains("pref=1,13&"));
+		assertTrue(qstr.contains("body=C%2CS&"));
+		assertTrue(qstr.contains("country=JPN%2CGBR&"));
+		assertTrue(qstr.contains("model=%E3%82%A4%E3%83%B3%E3%83%97%E3%83%AC%E3%83%83%E3%82%B5&"));
+		assertTrue(qstr.contains("keyword=%E3%81%8D%E3%82%8C%E3%81%84%5C%5C%26%26%26&"));
+		assertTrue(qstr.contains("pref=1%2C13&"));
 		assertTrue(qstr.contains("person=5&"));
 		assertTrue(qstr.contains("year_new=2001&"));
 		assertTrue(qstr.contains("year_old=1998&"));

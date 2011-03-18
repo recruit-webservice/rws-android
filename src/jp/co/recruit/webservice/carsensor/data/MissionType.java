@@ -9,7 +9,7 @@ public enum MissionType {
 	public int toInt() {
 		return intVal;
 	}
-	public MissionType valueOf(int val) {
+	public static MissionType valueOf(int val) {
 		for (MissionType d : values()) {
 			if (d.toInt() == val) {
 				return d;
