@@ -51,6 +51,8 @@ public class UsedCar extends RWSItem {
 	public ArrayList<Photo> subPhotos;
 	public UsedCar(JSONObject obj) throws JSONException {
 		super(obj);
+		if(obj==null)
+			return;
 		this.price = obj.optInt("price", -1);
 		if (obj.has("price")) {
 			if (this.price == -1)
