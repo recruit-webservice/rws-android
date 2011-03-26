@@ -28,8 +28,18 @@ public class RWSRequestAdapter extends URLRequestAdapter {
 		RWSRequest req = (RWSRequest) this.getRequest();
 		RWSResponse res = (RWSResponse) req.response;
 		this.total = res.getTotal();
-		if (this.getUnspecifyItemName() > 0) {
+		RWSItem unspecifyItem = getUnspecifyItem();
+		if (unspecifyItem != null) {
 			this.total++;
+			this.items.add(unspecifyItem);
+		}
+		for (RWSItem item : res.getItems()) {
+			this.items.add(item);
+		}
+	}
+
+	public RWSItem getUnspecifyItem() {
+		if (this.getUnspecifyItemName() > 0) {
 			RWSItem unspecifyItem = new RWSItem() {
 				@Override
 				public String detailUriFormat() {
@@ -38,11 +48,9 @@ public class RWSRequestAdapter extends URLRequestAdapter {
 			};
 			unspecifyItem.name = this.getContext().getString(
 					this.getUnspecifyItemName());
-			this.items.add(unspecifyItem);
+			return unspecifyItem;
 		}
-		for (RWSItem item : res.getItems()) {
-			this.items.add(item);
-		}
+		return null;
 	}
 
 	@Override

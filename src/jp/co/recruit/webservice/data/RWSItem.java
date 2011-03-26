@@ -19,17 +19,17 @@ public abstract class RWSItem implements URLRequestAdapter.Item {
 	public String name;
 	@JSONField("name_en")
 	public String nameEnglish;
-	
+
 	private int _id;
 	private static int sharedId = 0;
-	
+
 	public RWSItem() {
 		this._id = ++sharedId;
 	}
 
 	public RWSItem(JSONObject obj) throws JSONException {
 		this._id = ++sharedId;
-		if(obj==null)
+		if (obj == null)
 			return;
 		if (obj.has(this.codeField()))
 			this.code = obj.getString(this.codeField());
@@ -72,6 +72,11 @@ public abstract class RWSItem implements URLRequestAdapter.Item {
 			klass = klass.getSuperclass();
 		}
 
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return this.getClass().isInstance(o) && ((RWSItem) o).code.equals(code);
 	}
 
 	public String codeField() {
