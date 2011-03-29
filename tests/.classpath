@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/android20"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/RWSAndroid"/>
-	<classpathentry kind="src" path="RWSAndroid_src"/>
 	<classpathentry kind="src" path="android20_src"/>
+	<classpathentry kind="src" path="RWSAndroid_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
